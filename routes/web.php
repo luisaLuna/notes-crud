@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get("notes/getNotes", [NoteController::class, 'getAllNotes']);
+Route::delete("notes/{id}", [NoteController::class, 'delete']); 
