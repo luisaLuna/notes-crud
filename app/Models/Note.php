@@ -11,7 +11,7 @@ class Note extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    use Uuids;
+    use Uuid;
     protected $fillable = ["id", "title", "autor", "description"];
     protected $keyType = 'string';
     protected $primaryKey = 'id';
