@@ -19,4 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get("notes/getNotes", [NoteController::class, 'getAllNotes']);
+Route::post("notes/{id}", [NoteController::class, 'update']);
 Route::delete("notes/{id}", [NoteController::class, 'delete']); 
