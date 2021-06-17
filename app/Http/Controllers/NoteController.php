@@ -7,6 +7,19 @@ use App\Models\Note;
 
 class NoteController extends Controller
 {
+    public function create(Request $request){
+        $request = $request->all();
+        $status = 201;
+            $noteData = [
+                'id' => $request['id'],
+                'title' => $request['title'],
+                'autor' => $request['author'],
+                'description' => $request['description'],
+            ];
+            $note = Note::create($noteData);
+            return response()->json($note,$status);            
+    }
+    
     public function getAllNotes(){ 
         return Note::all()->sortByDesc('created_at');
     }
