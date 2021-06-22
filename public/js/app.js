@@ -1929,7 +1929,8 @@ __webpack_require__.r(__webpack_exports__);
     addNote: function addNote() {
       var container = document.querySelector('.notesContainer');
       var note = document.createElement('div');
-      note.innerHTML = "<div class=\"note\">\n   <div class=\"tools\">\n        <button class=\"delete\"><i class=\"fas fa-trash-alt\"></i></button>\n    </div>\n\n    <textarea id=\"title\" placeholder=\"Title\"></textarea>\n    <textarea id=\"author\" placeholder=\"Author\"></textarea>\n    <textarea id=\"description\" placeholder=\"Description\"></textarea>\n\n</div>";
+      note.classList.add('note');
+      note.innerHTML = "\n   <div class=\"tools\">\n        <button class=\"delete\"><i class=\"fas fa-trash-alt\"></i></button>\n    </div>\n\n    <textarea id=\"title\" placeholder=\"Title\"></textarea>\n    <textarea id=\"author\" placeholder=\"Author\"></textarea>\n    <textarea id=\"description\" placeholder=\"Description\"></textarea>\n";
       container.append(note);
     }
   },
@@ -1963,7 +1964,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      title: '',
+      author: '',
+      description: '',
+      id: ''
+    };
+  },
+  props: {},
+  methods: {
+    saveNote: function saveNote() {
+      axios.post('/notes', {
+        params: {
+          id: this.id,
+          title: this.title,
+          autor: this.author,
+          description: this.description
+        }
+      }).then(function (r) {
+        this.title = '';
+        this.author = '';
+        this.description = '';
+        this.id = '';
+        location.reload();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -20428,27 +20461,111 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "note" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.title,
+          expression: "title"
+        }
+      ],
+      attrs: { id: "title", placeholder: "Title" },
+      domProps: { value: _vm.title },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.title = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.author,
+          expression: "author"
+        }
+      ],
+      attrs: { id: "author", placeholder: "Author" },
+      domProps: { value: _vm.author },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.author = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("textarea", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.description,
+          expression: "description"
+        }
+      ],
+      attrs: { id: "description", placeholder: "Description" },
+      domProps: { value: _vm.description },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.description = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("textarea", {
+      directives: [
+        { name: "model", rawName: "v-model", value: _vm.id, expression: "id" }
+      ],
+      attrs: { id: "id", placeholder: "id" },
+      domProps: { value: _vm.id },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.id = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        attrs: { type: "submit" },
+        on: {
+          click: function($event) {
+            return _vm.saveNote()
+          }
+        }
+      },
+      [_vm._v("Save")]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "note" }, [
-      _c("div", { staticClass: "tools" }, [
-        _c("button", { staticClass: "delete" }, [
-          _c("i", { staticClass: "fas fa-trash-alt" })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("textarea", { attrs: { id: "title", placeholder: "Title" } }),
-      _vm._v(" "),
-      _c("textarea", { attrs: { id: "author", placeholder: "Author" } }),
-      _vm._v(" "),
-      _c("textarea", {
-        attrs: { id: "description", placeholder: "Description" }
-      })
+    return _c("div", { staticClass: "tools" }, [
+      _c("button", { staticClass: "delete" }, [
+        _c("i", { staticClass: "fas fa-trash-alt" })
+      ])
     ])
   }
 ]

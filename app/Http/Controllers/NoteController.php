@@ -8,13 +8,13 @@ use App\Models\Note;
 class NoteController extends Controller
 {
     public function create(Request $request){
-        $request = $request->all();
+      $request = $request->json()->all();
         $status = 201;
-            $noteData = [
-                'id' => $request['id'],
-                'title' => $request['title'],
-                'autor' => $request['author'],
-                'description' => $request['description'],
+          $noteData = [
+                'id' => $request[0]['id'],
+                'title' => $request[0]['title'],
+                'autor' => $request[0]['author'],
+                'description' => $request[0]['description'],
             ];
             $note = Note::create($noteData);
             return response()->json($note,$status);            

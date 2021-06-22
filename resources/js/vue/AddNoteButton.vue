@@ -20,7 +20,8 @@ export default {
     addNote(){
       let container = document.querySelector('.notesContainer');
       let note = document.createElement('div');
-      note.innerHTML = `<div class="note">
+      note.classList.add('note');
+      note.innerHTML = `
    <div class="tools">
         <button class="delete"><i class="fas fa-trash-alt"></i></button>
     </div>
@@ -28,8 +29,7 @@ export default {
     <textarea id="title" placeholder="Title"></textarea>
     <textarea id="author" placeholder="Author"></textarea>
     <textarea id="description" placeholder="Description"></textarea>
-
-</div>`
+`
       container.append(note);
     }
   },
